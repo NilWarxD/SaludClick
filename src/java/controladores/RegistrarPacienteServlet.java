@@ -27,8 +27,8 @@ public class RegistrarPacienteServlet extends HttpServlet {
         // 1. Capturar los parámetros tradicionales + la nueva contraseña
         String tipoDocumento = request.getParameter("tipoDocumento");
         String numeroDocumento = request.getParameter("numeroDocumento");
-        String nombres = request.getParameter("nombres");
-        String apellidos = request.getParameter("apellidos");
+        String nombres = request.getParameter("nombre");
+        String apellidos = request.getParameter("apellido");
         String telefono = request.getParameter("telefono");
         String email = request.getParameter("email");
         String password = request.getParameter("password"); // <-- Capturamos la clave
@@ -40,7 +40,7 @@ public class RegistrarPacienteServlet extends HttpServlet {
             con = ConexionDB.conectar();
             
             // 2. Agregamos el campo 'password' y un signo de interrogación (?) más al SQL
-            String sql = "INSERT INTO pacientes (numero_documento, tipo_documento, nombres, apellidos, telefono, email, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO paciente (numero_documento, tipo_documento, nombre, apellido, telefono, email, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
             ps = con.prepareStatement(sql);
             ps.setString(1, numeroDocumento);
             ps.setString(2, tipoDocumento);

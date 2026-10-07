@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
             con = ConexionDB.conectar();
             
             // Consultamos si el paciente con ese tipo y número existe en la base de datos
-            String sql = "SELECT * FROM pacientes WHERE numero_documento = ? AND tipo_documento = ?";
+            String sql = "SELECT * FROM paciente WHERE numero_documento = ? AND tipo_documento = ?";
             ps = con.prepareStatement(sql);
             ps.setString(1, numeroDocumento);
             ps.setString(2, tipoDocumento);

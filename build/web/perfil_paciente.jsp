@@ -8,12 +8,12 @@
     String nombres = "", apellidos = "", telefono = "", email = "", tipoDoc = "";
     try {
         Connection con = ConexionDB.conectar();
-        PreparedStatement ps = con.prepareStatement("SELECT * FROM pacientes WHERE numero_documento = ?");
+        PreparedStatement ps = con.prepareStatement("SELECT * FROM paciente WHERE numero_documento = ?");
         ps.setString(1, dniSesion);
         ResultSet rs = ps.executeQuery();
         if(rs.next()) {
-            nombres = rs.getString("nombres");
-            apellidos = rs.getString("apellidos");
+            nombres = rs.getString("nombre");
+            apellidos = rs.getString("apellido");
             telefono = rs.getString("telefono");
             email = rs.getString("email");
             tipoDoc = rs.getString("tipo_documento");

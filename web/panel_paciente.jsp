@@ -22,12 +22,12 @@
     ResultSet rsNom = null;
     try {
         conNom = Conexion.ConexionDB.conectar();
-        String sqlNom = "SELECT nombres FROM pacientes WHERE numero_documento = ?";
+        String sqlNom = "SELECT nombre FROM paciente WHERE numero_documento = ?";
         psNom = conNom.prepareStatement(sqlNom);
         psNom.setString(1, dniSesion);
         rsNom = psNom.executeQuery();
         if (rsNom.next()) {
-            nombrePaciente = rsNom.getString("nombres");
+            nombrePaciente = rsNom.getString("nombre");
         }
     } catch(Exception e) {
         nombrePaciente = "Paciente";
@@ -109,9 +109,9 @@
         </div>
 
         <!-- BARRA A TODO EL ANCHO: Establecimientos Registrados en la BD -->
-        <div class="banner-establecimientos">
+        <div class="banner-establecimiento">
             <h4>🏥 Establecimientos y Clínicas Asociadas Registradas en la Plataforma:</h4>
-            <div class="establecimientos-grid">
+            <div class="establecimiento-grid">
                 <%
                     Connection conBanner = null;
                     Statement stBanner = null;
@@ -119,7 +119,7 @@
                     try {
                         conBanner = Conexion.ConexionDB.conectar();
                         stBanner = conBanner.createStatement();
-                        rsBanner = stBanner.executeQuery("SELECT nombre FROM establecimientos ORDER BY nombre");
+                        rsBanner = stBanner.executeQuery("SELECT nombre FROM establecimiento ORDER BY nombre");
                         while(rsBanner.next()) {
                 %>
                             <div class="est-badge">
@@ -158,7 +158,7 @@
                             try {
                                 conEst = Conexion.ConexionDB.conectar();
                                 stEst = conEst.createStatement();
-                                rsEst = stEst.executeQuery("SELECT id, nombre FROM establecimientos ORDER BY nombre");
+                                rsEst = stEst.executeQuery("SELECT id, nombre FROM establecimiento ORDER BY nombre");
                                 while(rsEst.next()) {
                         %>
                                     <option value="<%= rsEst.getInt("id") %>"><%= rsEst.getString("nombre") %></option>
@@ -207,10 +207,10 @@
 
                 try {
                     conCitas = Conexion.ConexionDB.conectar();
-                    String sqlCitas = "SELECT c.fecha_cita, c.hora_cita, c.estado, m.especialidad, m.nombres AS medico_nombre, e.nombre AS est_nombre " +
-                                        "FROM citas c " +
-                                        "INNER JOIN medicos m ON c.id_medico = m.id " +
-                                        "INNER JOIN establecimientos e ON m.id_establecimiento = e.id " +
+                    String sqlCitas = "SELECT c.fecha_cita, c.hora_cita, c.estado, m.especialidad, m.nombre AS medico_nombre, e.nombre AS est_nombre " +
+                                        "FROM cita c " +
+                                        "INNER JOIN medico m ON c.id_medico = m.id " +
+                                        "INNER JOIN establecimiento e ON m.id_establecimiento = e.id " +
                                         "WHERE c.numero_documento = ? " +
                                         "ORDER BY c.fecha_cita ASC, c.hora_cita ASC";
 
@@ -269,11 +269,11 @@
                 try {
                     conData = Conexion.ConexionDB.conectar();
                     stData = conData.createStatement();
-                    rsData = stData.executeQuery("SELECT id, nombres, especialidad, id_establecimiento FROM medicos");
+                    rsData = stData.executeQuery("SELECT id, nombre, especialidad, id_establecimiento FROM medico");
                     boolean primero = true;
                     while(rsData.next()) {
                         if(!primero) out.print(",");
-                        out.print("{id:" + rsData.getInt("id") + ", nombre:'" + rsData.getString("nombres") + "', esp:'" + rsData.getString("especialidad") + "', estId:" + rsData.getInt("id_establecimiento") + "}");
+                        out.print("{id:" + rsData.getInt("id") + ", nombre:'" + rsData.getString("nombre") + "', esp:'" + rsData.getString("especialidad") + "', estId:" + rsData.getInt("id_establecimiento") + "}");
                         primero = false;
                     }
                 } catch(Exception e) {} finally { if(rsData!=null)rsData.close(); if(stData!=null)stData.close(); if(conData!=null)conData.close(); }

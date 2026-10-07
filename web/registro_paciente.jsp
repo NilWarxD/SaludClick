@@ -171,11 +171,11 @@
                         <input type="text" name="numeroDocumento" required placeholder="Nro de documento">
                     </div>
 
-                    <label for="nombres">Nombres:</label>
-                    <input type="text" id="nombres" name="nombres" class="normal-input" required placeholder="Nombres completos">
+                    <label for="nombre">Nombres:</label>
+                    <input type="text" id="nombre" name="nombre" class="normal-input" required placeholder="Nombre completo">
 
-                    <label for="apellidos">Apellidos:</label>
-                    <input type="text" id="apellidos" name="apellidos" class="normal-input" required placeholder="Apellidos completos">
+                    <label for="apellido">Apellidos:</label>
+                    <input type="text" id="apellido" name="apellido" class="normal-input" required placeholder="Apellido completo">
 
                     <label for="telefono">Teléfono / Celular:</label>
                     <input type="text" id="telefono" name="telefono" class="normal-input" placeholder="Ej. 987654321">

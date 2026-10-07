@@ -38,7 +38,7 @@
                 try {
                     Connection con = ConexionDB.conectar();
                     Statement st = con.createStatement();
-                    ResultSet rs = st.executeQuery("SELECT * FROM establecimientos ORDER BY tipo, nombre");
+                    ResultSet rs = st.executeQuery("SELECT * FROM establecimiento ORDER BY tipo, nombre");
                     while(rs.next()) {
             %>
                         <div class="card">

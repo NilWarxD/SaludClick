@@ -38,7 +38,7 @@ public class ProgramarCitaServlet extends HttpServlet {
             // 2. Sentencia SQL para insertar la nueva cita en MySQL Workbench
             // Nota: Se adaptó para registrar los campos obligatorios de tu tabla de citas
             // Reemplazamos 'dni_paciente' por 'numero_documento'
-            String sql = "INSERT INTO citas (numero_documento, id_medico, fecha_cita, hora_cita, estado) VALUES (?, ?, ?, ?, 'Programada')";
+            String sql = "INSERT INTO cita (numero_documento, id_medico, fecha_cita, hora_cita, estado) VALUES (?, ?, ?, ?, 'Programada')";
 
             ps = con.prepareStatement(sql);
             ps.setString(1, numeroDocumento);
