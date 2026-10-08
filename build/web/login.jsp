@@ -18,42 +18,41 @@
 
         /* COLUMNA IZQUIERDA: Imagen limpia  */
          .left-side { 
-            width: 55%; 
+            flex: 1; 
             background-image: url('img/fondo.jpg'); 
             background-size: cover; 
             background-position: center center;
             background-repeat: no-repeat; /* Evita que la foto se duplique */
             border-top-right-radius: 40px;
-            flex-shrink: 0; /* OBLIGATORIO: Evita que el navegador encoja o corte esta columna */
+            min-width:250px; 
 }
 
         /* COLUMNA DERECHA: Formulario  */
          .right-side { 
-            width: 45%; 
-            height: 100%;
+            width: 480px; 
+            min-height: 100vh;
             display: flex; 
             justify-content: center; 
             align-items: center; 
-            padding: 0 60px; 
+            padding: 30px 40px; 
             background-color: #ffffff;
             flex-shrink: 0; /* OBLIGATORIO: Evita que se encoja el lado del formulario */
+            overflow-y: auto;
+            
 }
+
         
         /* 4. CAJA BLANCA DEL LOGIN:*/
         .form-box { 
             width: 100%; 
-            max-width: 480px; 
+            max-width: 400px; 
             background: transparent; 
-            padding: 45px 40px; 
-            padding: 0; 
-            box-shadow: none; 
         }
         
         /* CONTENEDOR DEL LOGO AGRANDADO */
         .logo-container { 
-            text-align: center; 
-            margin-top: 50px;
-            margin-bottom: 20px; 
+            text-align: center;
+            margin-bottom: 10px; 
         }
         .logo-container img { 
             width: 350px; /* <--- Agrandamos considerablemente tu logo de SaludClick */
@@ -86,12 +85,10 @@
             border-radius: 10px; 
             overflow: hidden; 
         }
-        .document-group:focus-within { border-color: #2563eb; }
+        .document-group:focus-within { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12); }
 
-        /* Selector e input más altos y espaciosos */
-        .document-group select { border: none; padding: 18px 15px; background: #ffffff; font-size: 1.3rem; color: #000000; font-weight: 600; outline: none; border-right: 1.5px solid #cbd5e1; cursor: pointer; }
-        .document-group input { border: none; width: 100%; padding: 18px 20px; font-size: 1.15rem; outline: none; }
-
+        .document-group select { border: none; padding: 14px 12px; background: #ffffff; font-size: 1rem; color: #000000; font-weight: 600; outline: none; border-right: 1.5px solid #cbd5e1; cursor: pointer; }
+        .document-group input { border: none; width: 100%; padding: 14px 16px; font-size: 1rem; outline: none; }
         .normal-input { 
             width: 100%; 
             padding: 18px 20px; 
@@ -108,7 +105,7 @@
             width: 100%; 
             background-color: #1a56db; 
             color: white; 
-            padding: 12px; 
+            padding: 14px; 
             border: none; 
             border-radius: 30px; /* <--- Botón en forma de óvalo idéntico al de la clínica */
             font-size: 2.2rem; 
