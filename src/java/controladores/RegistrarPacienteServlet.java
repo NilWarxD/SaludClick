@@ -31,7 +31,7 @@ public class RegistrarPacienteServlet extends HttpServlet {
         String apellidos = request.getParameter("apellido");
         String telefono = request.getParameter("telefono");
         String email = request.getParameter("email");
-        String password = request.getParameter("password"); // <-- Capturamos la clave
+        String password = request.getParameter("password"); // <-- 
 
         Connection con = null;
         PreparedStatement ps = null;
