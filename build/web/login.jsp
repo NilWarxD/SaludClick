@@ -120,7 +120,18 @@
 
         .footer-links { margin-top: 35px; text-align: center; font-size: 1.05rem; color: #475569; }
         .footer-links a { color: #1a56db; text-decoration: none; font-weight: 700; }
-
+            
+    .mensaje-error {
+            background: #fef2f2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: center;
+        }
         @media (max-width: 900px) {
             .page-container { flex-direction: column; }
             .left-side, .right-side { width: 100%; min-height: auto; }
@@ -145,7 +156,14 @@
                 </div>
                 
                 <h2>Iniciar sesión</h2>
-                                
+                            <% String error = request.getParameter("error"); %>
+                            <% if ("1".equals(error)) { %>
+                                <div class="mensaje-error">Documento o contraseña incorrectos.</div>
+                            <% } else if ("2".equals(error)) { %>
+                                <div class="mensaje-error">Ocurrió un problema. Inténtalo de nuevo en unos minutos.</div>
+                            <% } %>
+
+                            <form action="LoginServlet" method="POST">    
                 <form action="LoginServlet" method="POST">
                     <label>Documento de Identidad:</label>
                     <div class="document-group">

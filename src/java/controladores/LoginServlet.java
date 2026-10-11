@@ -36,11 +36,12 @@ public class LoginServlet extends HttpServlet {
             con = ConexionDB.conectar();
             
             // Consultamos si el paciente con ese tipo y número existe en la base de datos
-            String sql = "SELECT * FROM paciente WHERE numero_documento = ? AND tipo_documento = ?";
+            String sql = "SELECT * FROM paciente WHERE numero_documento = ? AND tipo_documento = ? AND password = ?";
             ps = con.prepareStatement(sql);
             ps.setString(1, numeroDocumento);
             ps.setString(2, tipoDocumento);
-            
+            ps.setString(3, password);
+            //añadi password :v
             rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -54,18 +55,14 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("usuarioDni", dniLogueado);
                 // ¡Usuario encontrado! Redirigimos directamente al Panel del Paciente
                 response.sendRedirect("panel_paciente.jsp"); 
-            } else {
-                // Usuario no registrado o datos incorrectos
-                out.println("<!DOCTYPE html><html><body style='font-family:Arial; text-align:center; padding-top:50px;'>");
-                out.println("<h1 style='color:#c0392b;'>Error de Autenticación</h1>");
-                out.println("<p>El documento ingresado no se encuentra registrado en el sistema.</p>");
-                out.println("<br><a href='login.jsp'>Volver a intentar</a>");
-                out.println("</body></html>");
-            }
-
-        } catch (SQLException e) {
-            out.println("<h3>Error en el proceso de Login: " + e.getMessage() + "</h3>");
-        } finally {
+                } else {
+                    response.sendRedirect("login.jsp?error=1");
+                }//cambie el else 
+            //cambie el catch
+            } catch (SQLException e) {
+                e.printStackTrace();
+                response.sendRedirect("login.jsp?error=2");
+            } finally {
             try {
                 if (rs != null) rs.close();
                 if (ps != null) ps.close();
