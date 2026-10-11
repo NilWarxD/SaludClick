@@ -6,6 +6,17 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+    
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
+    
+    /*proteger el panel paciente*/
+    if (!"PACIENTE".equals(session.getAttribute("rol"))) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+
     String dniSesion = (String) session.getAttribute("usuarioDni");
     
     if (dniSesion == null) {
@@ -19,7 +30,7 @@
     ResultSet rsNom = null;
     try {
         conNom = Conexion.ConexionDB.conectar();
-        // Columna en singular: nombre
+        // Columna en singular
         String sqlNom = "SELECT nombre FROM paciente WHERE numero_documento = ?";
         psNom = conNom.prepareStatement(sqlNom);
         psNom.setString(1, dniSesion);
@@ -53,7 +64,7 @@
         .sidebar .logout { margin-top: auto; background-color: #b91c1c; color: white; text-align: center; padding: 12px 14px; font-size: 1.3rem; font-weight: 600; }
         .sidebar .logout:hover { background-color: #991b1b; }
 
-        /* Tarjetas de Establecimientos en la barra lateral */
+        /* Establecimientos en la barra lateral */
         .sidebar-est-title { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; color: #93c5fd; margin: 15px 0 8px 5px; font-weight: 700; }
         .est-card-sidebar { background: #ffffff; border-radius: 10px; overflow: hidden; margin-bottom: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border: 1px solid rgba(255, 255, 255, 0.2); }
         .est-card-sidebar img { width: 100%; height: 65px; object-fit: cover; display: block; }
@@ -62,19 +73,19 @@
         /* Contenedor Principal Derecho */
         .main-content { flex: 1; padding: 25px 40px; height: 100vh; overflow-y: auto; }
         
-        /* Bienvenida más grande y destacada */
+        /* Bienvenida */
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 2px solid #e2e8f0; padding-bottom: 15px; }
         .header h1 { font-size: 2.4rem; color: #0f172a; font-weight: 700; }
         
-        /* Grid con altura estirada para mantener uniformidad */
+
         .dashboard-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 25px; padding-bottom: 40px; align-items: stretch; }
         @media (max-width: 1024px) { .dashboard-grid { grid-template-columns: 1fr; } }
 
-        /* Tarjetas contenedoras en formato flex para estirarse al fondo */
+
         .card { background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; }
         .card h3 { color: #1e3a8a; font-size: 1.4rem; margin-bottom: 20px; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px; }
 
-        /* Formulario ampliado y adaptado para llenar el espacio vertical */
+        /* Formulario vertical */
         form { display: flex; flex-direction: column; flex: 1; justify-content: space-between; }
         label { display: block; font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 1.05rem; }
         select, input { width: 100%; padding: 16px 18px; margin-bottom: 18px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 1.15rem; outline: none; background-color: #fff; color: #0f172a; }
@@ -83,7 +94,7 @@
         button { width: 100%; background-color: #10b981; color: white; padding: 18px; border: none; border-radius: 10px; font-size: 1.25rem; font-weight: bold; cursor: pointer; transition: background 0.2s; margin-top: auto; }
         button:hover { background-color: #059669; }
 
-        /* Estilos de Próximas Citas */
+        /* Próximas Citas */
         .appointment-item { background: #f8fafc; border-left: 5px solid #2563eb; padding: 16px; border-radius: 0 8px 8px 0; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; }
         .appointment-info h4 { color: #1e293b; font-size: 1.1rem; }
         .appointment-info p { color: #64748b; font-size: 0.95rem; margin-top: 4px; }
@@ -108,7 +119,7 @@
             <img src="img/estable2.jpg" alt="Establecimiento 2">
         </div>
 
-        <a href="login.jsp" class="logout">Cerrar Sesión</a>
+        <a href="LogoutServlet" class="logout">Cerrar Sesión</a>
     </div>
 
     <div class="main-content">
@@ -119,7 +130,7 @@
 
         <div class="dashboard-grid">
             
-            <!-- COLUMNA 1: Formulario para Programar Cita -->
+            <!--  Formulario Programar Cita -->
             <div class="card">
                 <h3>Agendar Nueva Cita</h3>
                 <form action="ProgramarCitaServlet" method="POST">
@@ -174,7 +185,7 @@
                 </form>
             </div>
 
-            <!-- COLUMNA 2: Próximas Citas -->
+            <!-- Próximas Citas -->
             <div class="card" style="justify-content: flex-start;">
                 <h3>Mis Citas Programadas</h3>
 
@@ -185,7 +196,7 @@
 
                 try {
                     conCitas = Conexion.ConexionDB.conectar();
-                    // Consultas actualizadas con nombres de tablas y columnas en singular: cita, medico, establecimiento, nombre
+   
                     String sqlCitas = "SELECT c.fecha_cita, c.hora_cita, c.estado, m.especialidad, m.nombre AS medico_nombre, e.nombre AS est_nombre " +
                                         "FROM cita c " +
                                         "INNER JOIN medico m ON c.id_medico = m.id " +
@@ -247,7 +258,7 @@
             try {
                 conData = Conexion.ConexionDB.conectar();
                 stData = conData.createStatement();
-                // Consulta con tabla y columna en singular: medico, nombre
+                
                 rsData = stData.executeQuery("SELECT id, nombre, especialidad, id_establecimiento FROM medico");
                 boolean primero = true;
                 while(rsData.next()) {

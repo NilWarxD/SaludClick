@@ -1,6 +1,6 @@
 package controladores;
 
-import Conexion.ConexionDB; // Tu clase de conexión
+import Conexion.ConexionDB; 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -22,10 +22,9 @@ public class ProgramarCitaServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        // 1. Capturar los datos seleccionados por el paciente en el formulario web
-        // Reemplaza la captura antigua por esta versión limpia
+     
         String numeroDocumento = request.getParameter("numeroDocumento");
-        String idMedico = request.getParameter("idMedico"); // <-- Captura el ID dinámico del médico
+        String idMedico = request.getParameter("idMedico");
         String fecha = request.getParameter("fecha");
         String hora = request.getParameter("hora");
 
@@ -35,20 +34,18 @@ public class ProgramarCitaServlet extends HttpServlet {
         try {
             con = ConexionDB.conectar();
             
-            // 2. Sentencia SQL para insertar la nueva cita en MySQL Workbench
-            // Nota: Se adaptó para registrar los campos obligatorios de tu tabla de citas
-            // Reemplazamos 'dni_paciente' por 'numero_documento'
+            
             String sql = "INSERT INTO cita (numero_documento, id_medico, fecha_cita, hora_cita, estado) VALUES (?, ?, ?, ?, 'Programada')";
 
             ps = con.prepareStatement(sql);
             ps.setString(1, numeroDocumento);
-            ps.setInt(2, Integer.parseInt(idMedico)); // Convierte el texto del ID a número entero
+            ps.setInt(2, Integer.parseInt(idMedico)); 
             ps.setString(3, fecha);
             ps.setString(4, hora);
 
             int resultado = ps.executeUpdate();
 
-            // 3. Respuesta visual de éxito accesible
+
             out.println("<!DOCTYPE html>");
             out.println("<html lang='es'>");
             out.println("<head><title>Cita Confirmada</title></head>");

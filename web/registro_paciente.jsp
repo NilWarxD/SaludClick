@@ -8,7 +8,7 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
 
-            /* 1. CONTENEDOR PRINCIPAL: Asegura el ancho completo */
+            /* CONTENEDOR PRINCIPAL */
             .page-container {  
                 display: flex;  
                 min-height: 100vh;  
@@ -17,7 +17,7 @@
                 background-color: #ffffff;  
             }
 
-            /* COLUMNA IZQUIERDA: Imagen limpia */
+            /* COLUMNA IZQUIERDA*/
             .left-side {  
                 width: 55%;  
                 background-image: url('img/fondo2.jpg');  
@@ -28,7 +28,7 @@
                 flex-shrink: 0; 
             }
 
-            /* COLUMNA DERECHA: Formulario */
+            /* COLUMNA DERECHA */
             .right-side {  
                 width: 45%;  
                 height: 100%;
@@ -40,7 +40,7 @@
                 flex-shrink: 0; 
             }
 
-            /* 4. CAJA DEL FORMULARIO */
+            /* FORMULARIO */
             .form-box {  
                 width: 100%;  
                 max-width: 480px;  
@@ -49,7 +49,7 @@
                 box-shadow: none; 
             }
 
-            /* Título principal de Crear Cuenta */
+            /* Crear Cuenta */
             .form-box h2 { 
                 color: #000000;  
                 font-size: 2.5rem;  
@@ -75,7 +75,7 @@
                 font-size: 1.1rem; 
             }
 
-            /* Grupo del documento */
+            /*  documentos */
             .document-group {  
                 display: flex;  
                 margin-bottom: 20px;  
@@ -118,7 +118,7 @@
             }
             .normal-input:focus { border-color: #2563eb; }
 
-            /* Botón Registrar Paciente */
+            /*  Registrar Paciente */
             button {  
                 width: 100%;  
                 background-color: #1a56db;  

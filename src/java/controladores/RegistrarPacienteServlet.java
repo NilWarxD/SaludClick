@@ -1,13 +1,13 @@
 package controladores;
 
-import Conexion.ConexionDB; // Tu clase de conexión
+import Conexion.ConexionDB; 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-// IMPORTACIONES USANDO JAVAX (Tu entorno estable)
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,14 +24,14 @@ public class RegistrarPacienteServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        // 1. Capturar los parámetros tradicionales + la nueva contraseña
+        
         String tipoDocumento = request.getParameter("tipoDocumento");
         String numeroDocumento = request.getParameter("numeroDocumento");
         String nombres = request.getParameter("nombre");
         String apellidos = request.getParameter("apellido");
         String telefono = request.getParameter("telefono");
         String email = request.getParameter("email");
-        String password = request.getParameter("password"); // <-- 
+        String password = request.getParameter("password"); 
 
         Connection con = null;
         PreparedStatement ps = null;
@@ -39,7 +39,7 @@ public class RegistrarPacienteServlet extends HttpServlet {
         try {
             con = ConexionDB.conectar();
             
-            // 2. Agregamos el campo 'password' y un signo de interrogación (?) más al SQL
+            
             String sql = "INSERT INTO paciente (numero_documento, tipo_documento, nombre, apellido, telefono, email, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
             ps = con.prepareStatement(sql);
             ps.setString(1, numeroDocumento);
@@ -48,7 +48,7 @@ public class RegistrarPacienteServlet extends HttpServlet {
             ps.setString(4, apellidos);
             ps.setString(5, telefono);
             ps.setString(6, email);
-            ps.setString(7, password); // <-- Insertamos la clave en la posición 7
+            ps.setString(7, password); 
 
             int resultado = ps.executeUpdate();
 
