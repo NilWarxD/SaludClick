@@ -1,4 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,27 +12,27 @@
     <title>SaludClick - Iniciar Sesión</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
-        /* 1. CONTENEDOR PRINCIPAL: Asegura el ancho completo */
+        /* CONTENEDOR PRINCIPAL */
         .page-container { 
             display: flex; 
             min-height: 100vh; 
-            width: 100%; /* Asegura que ocupe toda la pantalla */
+            width: 100%; 
             overflow: hidden;
             background-color: #ffffff; 
 }
 
-        /* COLUMNA IZQUIERDA: Imagen limpia  */
+        /* COLUMNA IZQUIERDA*/
          .left-side { 
             width: 55%; 
             background-image: url('img/fondo.jpg'); 
             background-size: cover; 
             background-position: center center;
-            background-repeat: no-repeat; /* Evita que la foto se duplique */
+            background-repeat: no-repeat; 
             border-top-right-radius: 40px;
-            flex-shrink: 0; /* OBLIGATORIO: Evita que el navegador encoja o corte esta columna */
+            flex-shrink: 0; 
 }
 
-        /* COLUMNA DERECHA: Formulario  */
+        /* COLUMNA DERECHA*/
          .right-side { 
             width: 45%; 
             height: 100%;
@@ -36,10 +41,10 @@
             align-items: center; 
             padding: 0 60px; 
             background-color: #ffffff;
-            flex-shrink: 0; /* OBLIGATORIO: Evita que se encoja el lado del formulario */
+            flex-shrink: 0; 
 }
         
-        /* 4. CAJA BLANCA DEL LOGIN:*/
+        /* CAJA LOGIN:*/
         .form-box { 
             width: 100%; 
             max-width: 480px; 
@@ -49,19 +54,19 @@
             box-shadow: none; 
         }
         
-        /* CONTENEDOR DEL LOGO AGRANDADO */
+        /* LOGO */
         .logo-container { 
             text-align: center; 
             margin-top: 50px;
             margin-bottom: 20px; 
         }
         .logo-container img { 
-            width: 350px; /* <--- Agrandamos considerablemente tu logo de SaludClick */
+            width: 350px; 
             height: auto; 
             object-fit: contain;
         }
         
-        /* 5. TAMAÑO DE LOS TEXTOS INTERNOS: iniciar sesion */
+        /* TAMAÑO DE TEXTOS INTERNOS */
         .form-box h2 { 
             color: #000000; 
             font-size: 3rem; 
@@ -69,7 +74,7 @@
             font-weight: 700; 
             text-align: center; 
         }
-        /* 6. LABELS E INPUTS GIGANTES: letra documento y contra */
+        /*LABELS E INPUTS */
         label { 
             display: block; 
             font-weight: 600; 
@@ -78,7 +83,7 @@
             font-size: 1.5rem; 
         }
         
-        /* Campos de texto más grandes y cómodos para el usuario */
+        /* Campos de texto*/
         .document-group { 
             display: flex; 
             margin-bottom: 25px; 
@@ -88,7 +93,7 @@
         }
         .document-group:focus-within { border-color: #2563eb; }
 
-        /* Selector e input más altos y espaciosos */
+        /* Selector e input */
         .document-group select { border: none; padding: 18px 15px; background: #ffffff; font-size: 1.3rem; color: #000000; font-weight: 600; outline: none; border-right: 1.5px solid #cbd5e1; cursor: pointer; }
         .document-group input { border: none; width: 100%; padding: 18px 20px; font-size: 1.15rem; outline: none; }
 
@@ -103,14 +108,14 @@
         }
         .normal-input:focus { border-color: #2563eb; }
 
-        /* 7. BOTÓN INGRESAR ROBUSTO Y REDONDEADO */
+        /* BOTÓN INGRESAR*/
         button { 
             width: 100%; 
             background-color: #1a56db; 
             color: white; 
             padding: 12px; 
             border: none; 
-            border-radius: 30px; /* <--- Botón en forma de óvalo idéntico al de la clínica */
+            border-radius: 30px; 
             font-size: 2.2rem; 
             font-weight: bold; 
             cursor: pointer; 
@@ -120,7 +125,8 @@
 
         .footer-links { margin-top: 35px; text-align: center; font-size: 1.05rem; color: #475569; }
         .footer-links a { color: #1a56db; text-decoration: none; font-weight: 700; }
-            
+       
+        /*mansaje de error */   
     .mensaje-error {
             background: #fef2f2;
             color: #b91c1c;
@@ -143,19 +149,20 @@
 
     <div class="page-container">
         
-        <!-- COLUMNA IZQUIERDA: Aquí va tu imagen familiar limpia (45% del ancho) -->
+        <!-- COLUMNA IZQUIERDA -->
         <div class="left-side"></div>
         
-        <!-- COLUMNA DERECHA: Aquí va tu caja de login ampliada (55% del ancho) -->
+        <!-- COLUMNA DERECHA -->
         <div class="right-side">
             <div class="form-box">
                 
-                <!-- Tu logotipo de SaludClick en tamaño grande -->
+                <!-- logo de SaludClick  -->
                 <div class="logo-container">
                     <img src="img/logo1.png" alt="Logo SaludClick">
                 </div>
                 
                 <h2>Iniciar sesión</h2>
+                <!--mensaje de error-->
                             <% String error = request.getParameter("error"); %>
                             <% if ("1".equals(error)) { %>
                                 <div class="mensaje-error">Documento o contraseña incorrectos.</div>
