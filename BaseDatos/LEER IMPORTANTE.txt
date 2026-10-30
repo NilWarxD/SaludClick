@@ -1,0 +1,10 @@
+¡Importante para el equipo! (Limpieza del Repositorio)
+Acabo de actualizar el archivo .gitignore para evitar que sigamos subiendo basura de NetBeans al repositorio (archivos de la carpeta build/ y configuraciones locales de nbproject/).
+Para asegurarse de que Git no les siga arrastrando esos archivos locales, por favor realicen estos 3 pasos rápidos:
+1. Abran el proyecto en GitHub Desktop.
+2. Vayan al menú superior: Repository -> Open in Command Prompt 
+3. Copien, peguen este comando exacto en la ventana negra y presionen Enter:
+	git rm -r --cached build/ nbproject/
+
+(Nota: No se asusten si en GitHub Desktop les aparecen muchos archivos con un icono rojo de eliminación ➖. Eso significa que Git los borrará de la nube, pero NO se borrarán de sus computadoras).
+4. Finalmente, hagan un Commit y Push de esos cambios. ¡Listo! Con esto el repositorio quedará limpio para todos.
